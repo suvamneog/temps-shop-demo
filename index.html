@@ -1,0 +1,2148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Temps — Assamese Jalpan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #c62828;
+      --red-dark: #8e1515;
+      --ink: #222;
+      --muted: #666;
+      --line: #e6e6e6;
+      --soft: #f7f7f7;
+      --price: #d32f2f;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: "Anek Bangla", "Nirmala UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .skip {
+      position: absolute; left: 8px; top: -40px; background: #fff; padding: 6px 10px;
+    }
+    .skip:focus { top: 8px; z-index: 50; }
+
+    .topbar {
+      background: var(--red);
+      color: #fff;
+      font-size: 12px;
+      padding: 0 16px;
+    }
+    .top-meta, .top-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .top-item { display: inline-flex; align-items: center; gap: 6px; }
+    .top-item svg { flex: none; }
+    .top-links a {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .topbar .wrap, .wrap {
+      width: min(1360px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .topbar .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px 18px;
+      padding: 7px 0;
+      flex-wrap: wrap;
+    }
+    .top-social { display: flex; align-items: center; gap: 8px; }
+    .topbar .top-social a, .social-logo {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid #000;
+      border-radius: 4px;
+      background: #fff;
+      color: #111;
+      text-decoration: none;
+    }
+    .topbar .top-social a:hover, .social-logo:hover { text-decoration: none; background: #f3f3f3; color: #111; }
+    .top-social svg, .social-logo svg { width: 16px; height: 16px; }
+    .topbar a { color: #fff; text-decoration: none; }
+    .topbar a:hover { text-decoration: underline; }
+
+    .header { border-bottom: 1px solid var(--line); background: #fff; }
+    .brand { text-align: center; padding: 8px 12px 4px; }
+    .brand a { text-decoration: none; }
+    .brand-logo { display: block; width: 76px; height: auto; margin: 0 auto 6px; }
+    .brand-en {
+      display: block;
+      color: var(--red);
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .brand-sub { display: block; font-size: 13px; letter-spacing: .04em; }
+    .brand-as { display: block; color: var(--red); font-size: 22px; font-weight: 600; }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 8px;
+    }
+    .menu-btn {
+      display: none;
+      border: 1px solid #000;
+      background: #fff;
+      padding: 8px 12px;
+    }
+    .mnav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 46;
+      visibility: hidden;
+      pointer-events: none;
+      transition: visibility 0s linear .32s;
+    }
+    .mnav.open {
+      visibility: visible;
+      pointer-events: auto;
+      transition: visibility 0s;
+    }
+    .mnav-back {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .55);
+      opacity: 0;
+      transition: opacity .32s ease;
+    }
+    .mnav.open .mnav-back { opacity: 1; }
+    .mnav-panel {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: min(320px, 84%);
+      background: #fff;
+      overflow: auto;
+      transform: translateX(-100%);
+      transition: transform .32s ease;
+      box-shadow: 8px 0 24px rgba(0, 0, 0, .12);
+    }
+    .mnav.open .mnav-panel { transform: translateX(0); }
+    .mnav-search {
+      display: flex;
+      align-items: center;
+      margin: 14px 14px 6px;
+      border: 1px solid #e4e4e4;
+      background: #fff;
+    }
+    .mnav-search input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      padding: 10px 12px;
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      background: transparent;
+    }
+    .mnav-search input::placeholder { color: #b5b5b5; }
+    .mnav-search button {
+      border: 0;
+      background: none;
+      width: 40px;
+      height: 40px;
+      color: #c5c5c5;
+      display: grid;
+      place-items: center;
+    }
+    .mnav-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #eee;
+      margin-top: 6px;
+    }
+    .mnav-tabs button {
+      border: 0;
+      background: none;
+      padding: 12px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #b0b0b0;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .mnav-tabs button.on { color: var(--red); border-bottom-color: var(--red); }
+    .mnav-list a, .mnav-sub {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 16px;
+      border: 0;
+      border-bottom: 1px solid #eee;
+      background: none;
+      text-align: left;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-size: 13px;
+      font-weight: 600;
+      color: #8a8a8a;
+    }
+    .mnav-list a.active, .mnav-list a:hover, .mnav-sub.active { color: var(--red); }
+    .mnav-sub svg { color: #c8c8c8; transition: transform .28s ease; }
+    .mnav-sub.open svg { transform: rotate(90deg); }
+    .mnav-kids {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .28s ease;
+    }
+    .mnav-kids.open { grid-template-rows: 1fr; }
+    .mnav-kids > div { overflow: hidden; }
+    .mnav-kids a { padding-left: 28px; background: #fafafa; font-size: 12px; }
+    body.mnav-open { overflow: hidden; }
+    .nav {
+      display: flex;
+      flex: none;
+      flex-wrap: wrap;
+      gap: 8px 42px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .nav a { text-decoration: none; letter-spacing: .02em; }
+    .nav a:hover, .nav a.active { color: var(--red); }
+    .nav-tools { display: flex; align-items: center; gap: 12px; flex: 1; justify-content: flex-end; min-width: 0; }
+    .nav-tools a { text-decoration: none; font-weight: 600; white-space: nowrap; }
+    .nav-tools a:hover { color: var(--red); }
+    .search-bar {
+      display: flex;
+      align-items: stretch;
+      flex: 1;
+      min-width: 0;
+      max-width: 520px;
+      height: 40px;
+      border: 1px solid #000;
+      border-radius: 22px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .search-bar input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      padding: 0 14px;
+      font: inherit;
+      font-size: 14px;
+      color: #333;
+      background: transparent;
+      outline: none;
+    }
+    .search-bar input::placeholder { color: #b5b5b5; }
+    .search-bar input::-webkit-search-cancel-button { display: none; }
+    .search-bar select {
+      border: 0;
+      border-left: 1px solid #ededed;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b5b5b5' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
+      padding: 0 26px 0 12px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: #b5b5b5;
+      cursor: pointer;
+      outline: none;
+      max-width: 46%;
+      appearance: none;
+    }
+    .search-bar select.picked { color: #555; }
+    .search-go {
+      border: 0;
+      border-left: 1px solid #ededed;
+      background: #fff;
+      width: 44px;
+      color: #b5b5b5;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      flex: none;
+    }
+    .search-go:hover { color: #666; }
+    .head-icons { display: flex; align-items: center; gap: 18px; flex: none; padding-right: 10px; }
+    .head-icons a {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      color: #333;
+    }
+    .head-icons .badge {
+      position: absolute;
+      top: -5px;
+      right: -9px;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      border-radius: 8px;
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 16px;
+      text-align: center;
+    }
+
+    .gamosa {
+      height: 32px;
+      background: #fff url("images/gamosa.png") center / auto 32px repeat-x;
+    }
+
+    .banner { background: #f3ebe4; }
+    .banner img {
+      display: block;
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+    .banner-cap {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      padding: 12px 16px;
+    }
+    .banner-cap strong { display: block; font-size: 26px; font-weight: 700; }
+    .banner-cap span { font-size: 15px; }
+    .browse {
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+      background: var(--red-dark);
+      color: #fff;
+    }
+    .browse-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      padding: 14px 22px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .browse-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      z-index: 6;
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, .12);
+    }
+    .browse-menu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 22px;
+      text-decoration: none;
+      border-bottom: 1px solid #f2f2f2;
+    }
+    .browse-menu a:hover { background: var(--soft); color: var(--red); }
+    .browse-menu small { color: var(--muted); }
+
+    main { padding: 14px 0 40px; }
+    h1 { font-size: 28px; margin: 0 0 6px; font-weight: 700; }
+    h2 { font-size: 22px; margin: 0 0 10px; }
+    .crumb { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+    .crumb a { color: var(--muted); }
+
+    .home-sec { margin-top: 28px; }
+
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .side-stack { display: flex; flex-direction: column; }
+    .side {
+      border: 1px solid var(--line);
+      padding: 14px 16px;
+      background: #fff;
+    }
+    .side-line {
+      height: 1px;
+      margin: 16px 0 18px;
+      background: #000;
+    }
+    .side h2 { font-size: 16px; margin: 12px 0 6px; }
+    .side h2:first-child { margin-top: 0; }
+    .rated { margin-top: 8px; }
+    .rated a {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 0;
+      border-top: 1px solid #eee;
+      text-decoration: none;
+      color: inherit;
+    }
+    .rated img { width: 54px; height: 54px; object-fit: cover; background: #f6f6f6; }
+    .rated strong { display: block; font-size: 14px; font-weight: 600; }
+    .rated .stars { color: #ddd; font-size: 13px; letter-spacing: 1px; }
+    .rated .stars span { color: #f5b400; }
+    .rated .price { display: block; margin: 2px 0 0; font-size: 14px; }
+    .side label { display: flex; gap: 8px; align-items: center; margin: 5px 0; font-weight: 400; }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .toolbar select { border: 1px solid #ccc; padding: 6px 8px; background: #fff; }
+    .toolbar-tools { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    .show-n, .view-n { display: inline-flex; align-items: center; gap: 4px; }
+    .show-n button, .view-n button {
+      border: 0;
+      background: none;
+      padding: 2px 3px;
+      color: #9a9a9a;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .show-n button.on { color: var(--red); }
+    .view-n button {
+      display: inline-grid;
+      gap: 2px;
+      width: 22px;
+      height: 16px;
+      align-content: center;
+      justify-content: center;
+    }
+    .view-n button.on { color: #222; }
+    .view-n button[data-cols="2"] { grid-template-columns: repeat(2, 4px); }
+    .view-n button[data-cols="3"] { grid-template-columns: repeat(3, 4px); }
+    .view-n button[data-cols="4"] { grid-template-columns: repeat(4, 3px); }
+    .view-n button span { width: 4px; height: 4px; background: currentColor; }
+    .view-n button[data-cols="4"] span { width: 3px; height: 3px; }
+    #shopGrid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    #shopGrid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    #homeGrid { grid-template-columns: repeat(4, 1fr); }
+    .range { position: relative; height: 22px; margin: 12px 2px 6px; }
+    .range-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 9px;
+      height: 3px;
+      background: var(--red);
+    }
+    .range input[type="range"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      margin: 0;
+      background: none;
+      pointer-events: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .range input[type="range"]::-webkit-slider-runnable-track { height: 3px; background: transparent; }
+    .range input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      pointer-events: auto;
+      width: 6px;
+      height: 16px;
+      margin-top: -6px;
+      background: var(--red);
+      cursor: pointer;
+    }
+    .range input[type="range"]::-moz-range-track { height: 3px; background: transparent; border: 0; }
+    .range input[type="range"]::-moz-range-thumb {
+      pointer-events: auto;
+      width: 6px;
+      height: 16px;
+      border: 0;
+      border-radius: 0;
+      background: var(--red);
+      cursor: pointer;
+    }
+    .price-apply {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+    .price-apply strong { color: #222; font-weight: 700; }
+    .filter-go {
+      border: 0;
+      background: #f2f2f2;
+      color: #9a9a9a;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      cursor: pointer;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px 12px;
+    }
+    .card {
+      position: relative;
+      text-align: center;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 0 12px 14px;
+      transition: border-color .28s ease, box-shadow .28s ease;
+    }
+    .card:hover { border-color: #e7cfc0; z-index: 3; }
+    .peek { display: none; }
+    @media (hover: hover) and (min-width: 801px) {
+      .card:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, .08); }
+      .peek {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        background: #fff;
+        box-shadow: 0 14px 32px rgba(0, 0, 0, .14);
+        padding: 14px 16px 12px;
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity .28s ease, transform .32s ease, visibility .32s ease;
+      }
+      .peek > * {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity .28s ease, transform .28s ease;
+      }
+      .card:hover .peek,
+      .card:focus-within .peek {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+      }
+      .card:hover .peek > *,
+      .card:focus-within .peek > * {
+        opacity: 1;
+        transform: none;
+      }
+      .card:hover .peek > :nth-child(1),
+      .card:focus-within .peek > :nth-child(1) { transition-delay: .04s; }
+      .card:hover .peek > :nth-child(2),
+      .card:focus-within .peek > :nth-child(2) { transition-delay: .08s; }
+      .card:hover .peek > :nth-child(3),
+      .card:focus-within .peek > :nth-child(3) { transition-delay: .12s; }
+      .card:hover .peek > :nth-child(4),
+      .card:focus-within .peek > :nth-child(4) { transition-delay: .16s; }
+      .card:hover .peek > :nth-child(5),
+      .card:focus-within .peek > :nth-child(5) { transition-delay: .2s; }
+      .card:hover .peek > :nth-child(6),
+      .card:focus-within .peek > :nth-child(6) { transition-delay: .24s; }
+    }
+    .peek img {
+      width: 148px;
+      height: 120px;
+      object-fit: cover;
+      margin: 0 auto 8px;
+    }
+    .peek strong { display: block; font-size: 16px; }
+    .peek-cat { display: block; color: var(--muted); font-size: 13px; margin: 2px 0; }
+    .peek p {
+      margin: 0 0 10px;
+      color: #444;
+      font-size: 13px;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .peek-row { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .peek-row .btn { margin: 0; padding: 8px 12px; font-size: 13px; }
+    .peek-icon {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      background: #fff;
+      color: #444;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      padding: 0;
+      flex: none;
+    }
+    .peek-icon.on { color: var(--red); border-color: var(--red); }
+    .card .pack-stage { margin: 0 -12px 10px; }
+    .pack-link { display: block; text-decoration: none; color: inherit; }
+    .pack-stage {
+      height: 292px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      margin-bottom: 10px;
+      background-color: #f6ebe3;
+      background-image:
+        linear-gradient(45deg, transparent 46%, #e7cfc0 46% 54%, transparent 54%),
+        linear-gradient(-45deg, transparent 46%, #e7cfc0 46% 54%, transparent 54%);
+      background-size: 26px 26px;
+    }
+    .pouch {
+      width: 176px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fffdf8;
+      border: 1px solid #eadccf;
+      box-shadow: 0 10px 22px rgba(80, 40, 20, .14);
+    }
+    .pouch::before,
+    .pouch::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 12px;
+      background: #fff url("images/gamosa.png") center / auto 100% repeat-x;
+    }
+    .pouch::before { margin-bottom: 8px; }
+    .pouch::after { margin-top: 8px; }
+    .pack-brand {
+      color: #a71920;
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 1;
+    }
+    .pack-place {
+      margin-top: 2px;
+      color: #6d5648;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .pack-photo {
+      width: 96px;
+      height: 96px;
+      margin: 8px 0 6px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #c6a15b;
+      background: #f7efe4;
+    }
+    .pack-photo img {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+    }
+    .pack-name {
+      min-height: 2.3em;
+      padding: 0 10px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.15;
+      text-align: center;
+    }
+    .pack-weight { color: #7a6558; font-size: 13px; margin-bottom: 2px; }
+    .as-name { color: var(--muted); font-size: 14px; font-weight: 700; }
+    .price { color: var(--price); font-weight: 700; margin: 4px 0 8px; }
+    .card .btn, .product-buy .btn { margin-top: 4px; }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--red);
+      background: var(--red);
+      color: #fff;
+      padding: 8px 14px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn:hover { background: var(--red-dark); }
+    .btn.light { background: #fff; color: var(--ink); border-color: #ccc; }
+    .btn.light:hover { border-color: var(--red); color: var(--red); background: #fff; }
+    .btn.small { padding: 4px 8px; }
+
+    .pages { display: flex; gap: 6px; justify-content: center; margin-top: 18px; }
+    .pages button {
+      min-width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 4px 8px;
+    }
+    .pages button.on { background: var(--red); color: #fff; border-color: var(--red); }
+
+    .product {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 28px;
+    }
+    .product .pack-stage { height: 440px; }
+    .product .pouch { width: 240px; }
+    .product .pouch::before, .product .pouch::after { height: 16px; }
+    .product .pack-photo { width: 132px; height: 132px; }
+    .product .pack-brand { font-size: 34px; }
+    .product .pack-name { font-size: 20px; }
+    .product h1 { font-size: 30px; }
+    .product .price { font-size: 22px; }
+    table.facts { border-collapse: collapse; margin: 12px 0; }
+    table.facts td { border: 1px solid var(--line); padding: 8px 14px; }
+    table.facts td:first-child { font-weight: 600; background: var(--soft); }
+    .qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .qty button {
+      width: 32px; height: 32px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    .qty input { width: 52px; text-align: center; border: 1px solid #ccc; padding: 6px; }
+    .note { color: #2e7d32; font-weight: 600; min-height: 1.2em; }
+
+    .cart-scroll { overflow-x: auto; }
+    .cart-table { width: 100%; border-collapse: collapse; }
+    .cart-table th { text-align: left; font-size: 14px; color: var(--muted); }
+    .cart-table th, .cart-table td { border-bottom: 1px solid var(--line); padding: 10px 6px; vertical-align: middle; }
+    .totals { margin-top: 12px; text-align: right; }
+    .totals strong { font-size: 20px; }
+    .form { max-width: 520px; }
+    .contact-grid .form { max-width: none; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px 48px;
+      align-items: start;
+    }
+    .section-line {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 0 18px;
+    }
+    .section-line::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e4e4e4;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 18px;
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+    .contact-row svg { color: #d0d0d0; margin-top: 2px; }
+    .contact-row p { margin: 0; }
+    .follow { margin-top: 22px; }
+    .follow .top-social { margin-top: 8px; }
+    .faq { margin-top: 34px; }
+    .faq details { border-top: 1px solid #e4e4e4; }
+    .faq details:last-of-type { border-bottom: 1px solid #e4e4e4; }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 0;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "⌄"; color: #b0b0b0; font-size: 18px; }
+    .faq details[open] summary::after { content: "⌃"; }
+    .faq details p { margin: 0 0 14px; color: #666; max-width: 760px; }
+    .faq-ask { margin: 22px 0 0; font-weight: 700; }
+    .faq-ask a { color: #43a047; text-decoration: none; }
+    .form label, .side label.block { display: block; margin: 12px 0 4px; font-weight: 600; }
+    .form label.pay { font-weight: 400; display: flex; gap: 8px; align-items: center; }
+    .form input, .form textarea, .form select, .product select {
+      width: 100%;
+      border: 1px solid #ccc;
+      padding: 8px;
+      background: #fff;
+    }
+    .form textarea { min-height: 90px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .about p { max-width: 640px; }
+
+    .pay-strip {
+      background: #fff;
+      border-top: 1px solid var(--line);
+      padding: 26px 0;
+    }
+    .pay-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px 28px;
+      flex-wrap: wrap;
+    }
+    .store-logo {
+      display: block;
+      height: 48px;
+      width: auto;
+      max-width: 200px;
+    }
+    .footer {
+      background: #fff;
+      border-top: 1px solid var(--line);
+      padding: 28px 0 0;
+      font-size: 15px;
+    }
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 28px;
+      padding-bottom: 22px;
+    }
+    .foot-brand {
+      margin: 0;
+      color: var(--red);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .foot-sub { margin: 2px 0 10px; font-size: 13px; }
+    .footer p { margin: 0 0 8px; }
+    .footer h2 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .footer ul { margin: 0; padding: 0; list-style: none; }
+    .footer li { margin: 5px 0; }
+    .footer a { text-decoration: none; }
+    .footer a:hover { color: var(--red); }
+    .copybar {
+      border-top: 1px solid var(--line);
+      padding: 12px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+    body.drawer-open { overflow: hidden; }
+    .drawer-back, .drawer {
+      position: fixed;
+      z-index: 40;
+    }
+    .drawer-back { inset: 0; background: rgba(0, 0, 0, .45); }
+    .drawer {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(400px, 100%);
+      z-index: 41;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -10px 0 28px rgba(0, 0, 0, .12);
+    }
+    .drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px;
+      border-bottom: 1px solid #eee;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .drawer-close {
+      border: 0;
+      background: none;
+      color: #888;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .drawer-body { flex: 1; overflow: auto; padding: 18px; }
+    .drawer-empty {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #9a9a9a;
+      gap: 16px;
+    }
+    .drawer-empty p { margin: 0; }
+    .drawer-return {
+      border-radius: 22px;
+      padding: 10px 22px;
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .drawer-line {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .drawer-line img { width: 64px; height: 64px; object-fit: cover; }
+    .drawer-line strong { display: block; font-size: 15px; }
+    .drawer-line span { color: var(--muted); font-size: 14px; }
+    .drawer-line button {
+      border: 0;
+      background: none;
+      color: #999;
+      font-size: 20px;
+      line-height: 1;
+    }
+    .drawer-sub {
+      display: flex;
+      justify-content: space-between;
+      margin: 16px 0 12px;
+      font-weight: 700;
+    }
+    .chat-fab {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+    }
+    .chat-btn {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25d366;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+      text-decoration: none;
+      flex: none;
+    }
+    .chat-btn:hover { background: #1ebe5d; }
+
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: #fff;
+      border-top: 1px solid var(--line);
+      z-index: 20;
+    }
+    .bottom-nav a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      padding: 10px 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    #filterBtn { display: none; }
+
+    @media (max-width: 1040px) {
+      #shopGrid,
+      #shopGrid.cols-3,
+      #shopGrid.cols-4 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 800px) {
+      .top-meta, .top-links { gap: 8px 14px; }
+      .top-links a { letter-spacing: .03em; }
+      .menu-btn { display: inline-block; order: 1; }
+      .nav { display: none; }
+      .mnav { display: block; }
+      .nav-row { flex-wrap: wrap; gap: 10px; }
+      .nav-tools { display: contents; }
+      .head-icons { order: 2; margin-left: auto; gap: 14px; }
+      .search-bar { order: 3; flex: 1 1 100%; max-width: none; height: 40px; }
+      .search-bar select { font-size: 12px; max-width: 42%; }
+      .banner-cap strong { font-size: 22px; }
+      .banner-cap span { font-size: 14px; }
+      .grid, #homeGrid { grid-template-columns: 1fr 1fr; }
+      #shopGrid.cols-2, #shopGrid.cols-3, #shopGrid.cols-4 { grid-template-columns: 1fr 1fr; }
+      .grid { gap: 14px; }
+      .card { padding: 0 8px 12px; }
+      .card .pack-stage { height: 214px; margin: 0 -8px 8px; }
+      .grid .pouch { width: min(142px, 88%); }
+      .grid .pack-brand { font-size: 18px; }
+      .grid .pack-place { font-size: 8px; letter-spacing: .06em; }
+      .grid .pack-photo { width: 64px; height: 64px; margin: 6px 0 4px; border-width: 2px; }
+      .grid .pack-name { font-size: 13px; min-height: 2.2em; padding: 0 6px; }
+      .grid .pack-weight { font-size: 11px; }
+      .grid .pouch::before, .grid .pouch::after { height: 10px; }
+      .grid .as-name { font-size: 12px; }
+      .grid .price { font-size: 15px; margin: 2px 0 8px; }
+      .card .btn { display: block; width: 100%; padding: 8px 6px; font-size: 13px; }
+      .toolbar { flex-wrap: wrap; align-items: flex-start; }
+      #resultCount { flex: 1 1 100%; }
+      .toolbar-tools { width: 100%; justify-content: flex-start; gap: 8px 12px; }
+      .toolbar select { max-width: 100%; }
+      .shop-layout, .product, .two, .contact-grid, .info-grid { grid-template-columns: 1fr; }
+      .product .pack-stage { height: 320px; }
+      .product .pouch { width: min(220px, 86%); }
+      .product h1 { font-size: 26px; }
+      .cart-scroll .cart-table { min-width: 520px; }
+      .foot-grid { grid-template-columns: 1fr 1fr; gap: 22px 16px; }
+      .banner img { height: 180px; }
+      .browse-btn { padding: 12px 14px; font-size: 13px; letter-spacing: .04em; }
+      .bottom-nav { display: flex; }
+      .bottom-nav a { font-size: 12px; padding: 8px 2px 10px; }
+      .footer { padding-bottom: 56px; }
+      .chat-fab { right: 12px; bottom: 62px; }
+      .pay-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        gap: 16px 12px;
+      }
+      .store-logo { height: 36px; width: auto; max-width: 100%; object-fit: contain; }
+      #filterBtn { display: inline-block; }
+      .side-stack.closed { display: none; }
+    }
+    @media (max-width: 460px) {
+      .brand-en { font-size: 28px; }
+      .brand-as { font-size: 18px; }
+      .gamosa { height: 24px; background-size: auto 24px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="topbar">
+    <div class="wrap">
+      <span class="top-meta">
+        <a class="top-item" href="#contact">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.2a12 12 0 0 0 5.3 5.3l1.2-2 4 1.5v3A2 2 0 0 1 17.5 18 14.5 14.5 0 0 1 5 5.5a2 2 0 0 1 1.5-2z"/></svg>
+          91 xxxx xxxx xx
+        </a>
+        <a class="top-item" href="#contact">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M4 7l8 6 8-6"/></svg>
+          Email
+        </a>
+        <a class="top-item" href="#contact">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/></svg>
+          Kamrup, Assam
+        </a>
+      </span>
+      <span class="top-social">
+        <a href="#contact" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1z"/></svg>
+        </a>
+        <a href="#contact" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#contact" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2A8.7 8.7 0 0 0 4.6 16.3L3.5 20.5l4.3-1.1A8.8 8.8 0 1 0 12 3.2zm4.8 12.3c-.2.6-1.2 1.1-1.6 1.1-.4.1-.9.2-1.5-.1-.3-.1-.7-.3-1.2-.5-2.1-1-3.5-3.2-3.6-3.3-.1-.2-.9-1.2-.9-2.3s.6-1.6.8-1.8c.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .5.4.2.5.6 1.6.7 1.7.1.1.1.3 0 .4l-.3.5c-.1.1-.2.2-.1.4.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.4-.1l.5-.6c.1-.2.3-.1.5-.1.2.1 1.3.6 1.5.7.2.1.3.2.4.3.1.2.1.6-.1 1.2z"/></svg>
+        </a>
+      </span>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="brand">
+      <a href="#home">
+        <img class="brand-logo" src="images/japi.png" alt="" />
+        <span class="brand-en">Temps</span>
+        <span class="brand-sub">Kamrup Spice</span>
+        <span class="brand-as" lang="as">অসমীয়া জলপান</span>
+      </a>
+    </div>
+    <div class="wrap nav-row">
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mnav">Menu</button>
+      <ul class="nav" id="nav">
+        <li><a href="#home" data-nav="home">Home</a></li>
+        <li><a href="#shop" data-nav="shop">Shop</a></li>
+        <li><a href="#about" data-nav="about">About</a></li>
+        <li><a href="#orders" data-nav="orders">Orders</a></li>
+        <li><a href="#contact" data-nav="contact">Contact</a></li>
+      </ul>
+      <div class="nav-tools">
+        <form class="search-bar" id="searchForm" role="search">
+          <input id="search" type="search" placeholder="Search for products" aria-label="Search products" />
+          <select id="searchCat" aria-label="Category">
+            <option value="">SELECT CATEGORY</option>
+            <option value="Pitha">Pitha</option>
+            <option value="Laddoo">Laddoo</option>
+            <option value="Jalpan">Jalpan</option>
+            <option value="Rice">Rice</option>
+            <option value="Grocery">Grocery</option>
+          </select>
+          <button class="search-go" type="submit" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          </button>
+        </form>
+        <span class="head-icons">
+          <a href="#orders" aria-label="Orders">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.2 19.2c1.3-3 3.6-4.4 6.8-4.4s5.5 1.4 6.8 4.4"/></svg>
+          </a>
+          <a href="#wishlist" aria-label="Wishlist">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 19.4S6 15.6 3.8 11.9C2.4 9.5 3.2 6.6 5.8 5.6c1.8-.7 3.6 0 6.2 2.6 2.6-2.6 4.4-3.3 6.2-2.6 2.6 1 3.4 3.9 2 6.3C18 15.6 12 19.4 12 19.4z"/></svg>
+            <span class="badge" id="navWish">0</span>
+          </a>
+          <a href="#cart" data-drawer aria-label="Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6.6 8.2h10.8l-.7 11.2H7.3L6.6 8.2z"/><path d="M9 8.2V6.6a3 3 0 0 1 6 0v1.6"/></svg>
+            <span class="badge" id="navCart">0</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </header>
+  <div class="gamosa" aria-hidden="true"></div>
+
+  <div class="banner" id="homeBanner">
+    <img id="heroImg" alt="Assamese pitha and laddoo on a brass platter, with a jaapi and gamosa" src="images/hero.jpg?v=4" />
+    <div class="banner-cap">
+      <strong lang="as">পিঠা, লাড়ু আৰু জলপান</strong>
+      <span>Order online. Packed in Assam, delivered home.</span>
+    </div>
+  </div>
+
+  <main id="main">
+    <div class="wrap">
+      <section id="view-home">
+        <div class="browse" id="homeBrowse">
+          <button class="browse-btn" id="browseBtn" type="button" aria-expanded="false" aria-controls="browseMenu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            Browse categories
+          </button>
+          <div class="browse-menu" id="browseMenu" hidden></div>
+        </div>
+        <h2 class="home-sec">Featured products</h2>
+        <div class="grid" id="featuredGrid"></div>
+        <h2 class="home-sec">Our products</h2>
+        <p class="crumb">Pitha, laddoo, jalpan and rice. Ships across India.</p>
+        <div class="grid" id="homeGrid"></div>
+        <p style="text-align:center;margin-top:18px"><a class="btn" href="#shop">Shop all</a></p>
+      </section>
+
+      <section id="view-shop" hidden>
+        <p class="crumb"><a href="#home">Home</a> / Products</p>
+        <div class="shop-layout">
+          <div class="side-stack closed" id="side">
+            <aside class="side">
+              <h2>Categories</h2>
+              <div id="catFilters"></div>
+              <h2>Filter by price</h2>
+              <div class="range">
+                <div class="range-bar"></div>
+                <input id="priceMin" type="range" min="0" max="170" value="0" aria-label="Minimum price" />
+                <input id="priceMax" type="range" min="0" max="170" value="170" aria-label="Maximum price" />
+              </div>
+              <div class="price-apply">
+                <span>Price: <strong id="priceReadout">₹0 – ₹170</strong></span>
+                <button class="filter-go" id="priceFilter" type="button">Filter</button>
+              </div>
+            </aside>
+            <div class="side-line"></div>
+            <aside class="side">
+              <h2>Top rated products</h2>
+              <div class="rated" id="topRated"></div>
+            </aside>
+          </div>
+          <div>
+            <div class="toolbar">
+              <span id="resultCount"></span>
+              <div class="toolbar-tools">
+                <span class="show-n">Show:
+                  <button type="button" data-size="9" class="on">9</button>
+                  <button type="button" data-size="12">12</button>
+                  <button type="button" data-size="18">18</button>
+                  <button type="button" data-size="24">24</button>
+                </span>
+                <span class="view-n" role="group" aria-label="Columns">
+                  <button type="button" data-cols="2" aria-label="Two columns"><span></span><span></span><span></span><span></span></button>
+                  <button type="button" data-cols="3" class="on" aria-label="Three columns"><span></span><span></span><span></span><span></span><span></span><span></span></button>
+                  <button type="button" data-cols="4" aria-label="Four columns"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button>
+                </span>
+                <button class="btn light small" id="filterBtn" type="button">Filters</button>
+                <select id="sort" aria-label="Sort products">
+                  <option value="popular">Sort by popularity</option>
+                  <option value="low">Sort by price: low to high</option>
+                  <option value="high">Sort by price: high to low</option>
+                  <option value="name">Sort by name</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid" id="shopGrid"></div>
+            <div class="pages" id="pages"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-product" hidden>
+        <p class="crumb" id="productCrumb"></p>
+        <div class="product" id="productView"></div>
+        <h2 style="margin-top:28px">More from this range</h2>
+        <div class="grid" id="related"></div>
+      </section>
+
+      <section id="view-cart" hidden>
+        <p class="crumb"><a href="#home">Home</a> / Cart</p>
+        <h1>Cart</h1>
+        <div id="cartBody"></div>
+      </section>
+
+      <section id="view-wishlist" hidden>
+        <p class="crumb"><a href="#home">Home</a> / Wishlist</p>
+        <h1>Wishlist</h1>
+        <div class="grid" id="wishGrid"></div>
+      </section>
+
+      <section id="view-about" hidden>
+        <p class="crumb"><a href="#home">Home</a> / About Us</p>
+        <div class="about">
+          <h1>About Temps</h1>
+          <p>Temps is a direct-to-consumer shop from Kamrup Spice. You order pitha, laddoo, jalpan and rice products on this site. We pack them in Kamrup and ship them to your address.</p>
+          <p>Pay by UPI, card, or cash on delivery. Delivery is ₹49, and free on orders of ₹499 and above.</p>
+        </div>
+      </section>
+
+      <section id="view-contact" hidden>
+        <p class="crumb"><a href="#home">Home</a> / Contact Us</p>
+        <h1 class="section-line">Contact us</h1>
+        <div class="contact-grid">
+          <form class="form" id="contactForm">
+            <label for="cName">Name</label>
+            <input id="cName" name="name" required />
+            <label for="cPhone">Phone</label>
+            <input id="cPhone" name="phone" required inputmode="tel" />
+            <label for="cMsg">Message</label>
+            <textarea id="cMsg" name="message" required></textarea>
+            <p><button class="btn" type="submit">Send</button></p>
+            <p class="note" id="contactNote"></p>
+          </form>
+          <div>
+            <div class="info-grid">
+              <div class="contact-row">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg>
+                <p><strong>Phone</strong><br>91 xxxx xxxx xx<br><strong>Email</strong><br>Message us on this form</p>
+              </div>
+              <div class="contact-row">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 16.5a6 6 0 1 1 8.5-8.5L19 4.5"/><path d="M8 15.5l1.2 1.2"/></svg>
+                <p><strong>Customer support</strong> Write on the form and we will reply.</p>
+              </div>
+              <div class="contact-row">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 12.5l18-7-6.5 16-2.8-6.2L3 12.5z"/></svg>
+                <p><strong>1) Standard shipping</strong> ₹49. Free on orders of ₹499 and above.</p>
+              </div>
+              <div class="contact-row">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/></svg>
+                <p><strong>Address</strong> Kamrup, Assam</p>
+              </div>
+            </div>
+            <div class="contact-row follow">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="7" cy="8" r="2"/><circle cx="16" cy="7" r="2"/><circle cx="12" cy="16" r="2"/><path d="M8.6 9.4l2.2 5.2M14.4 8.6l-1.4 5.6"/></svg>
+              <div>
+                <p><strong>Follow us</strong></p>
+                <span class="top-social">
+                <a class="social-logo" href="#contact" aria-label="Facebook">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1z"/></svg>
+                </a>
+                <a class="social-logo" href="#contact" aria-label="Instagram">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+                </a>
+                <a class="social-logo" href="#contact" aria-label="WhatsApp">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2A8.7 8.7 0 0 0 4.6 16.3L3.5 20.5l4.3-1.1A8.8 8.8 0 1 0 12 3.2zm4.8 12.3c-.2.6-1.2 1.1-1.6 1.1-.4.1-.9.2-1.5-.1-.3-.1-.7-.3-1.2-.5-2.1-1-3.5-3.2-3.6-3.3-.1-.2-.9-1.2-.9-2.3s.6-1.6.8-1.8c.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .5.4.2.5.6 1.6.7 1.7.1.1.1.3 0 .4l-.3.5c-.1.1-.2.2-.1.4.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.4-.1l.5-.6c.1-.2.3-.1.5-.1.2.1 1.3.6 1.5.7.2.1.3.2.4.3.1.2.1.6-.1 1.2z"/></svg>
+                </a>
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="faq">
+          <h2 class="section-line">Frequently asked questions</h2>
+          <details open>
+            <summary>What is Temps?</summary>
+            <p>Temps is a direct-to-consumer shop from Kamrup Spice. You order pitha, laddoo, jalpan and rice on this site. We pack the order in Kamrup and ship it to your address.</p>
+          </details>
+          <details>
+            <summary>Where can you get the products?</summary>
+            <p>Order on this site. We ship across India. Delivery is ₹49, and free on orders of ₹499 and above.</p>
+          </details>
+          <details>
+            <summary>What is there besides laddoo and pitha?</summary>
+            <p>Jalpan, rice and grocery. That includes muri, akhoi, pithaguri, sandah, joha rice and atta.</p>
+          </details>
+          <details>
+            <summary>Is doorstep delivery available?</summary>
+            <p>Yes. Add a pack to the cart, enter your address at checkout, and we ship it to you.</p>
+          </details>
+          <details>
+            <summary>Can children and older people eat these?</summary>
+            <p>These are traditional snacks and rice foods. For an infant, ask a doctor before you feed them.</p>
+          </details>
+          <p class="faq-ask">Do you have a question about an order?</p>
+          <p class="faq-ask"><a href="#cMsg">Send a message and we will reply.</a></p>
+        </div>
+      </section>
+
+      <section id="view-checkout" hidden>
+        <p class="crumb"><a href="#home">Home</a> / <a href="#cart">Cart</a> / Checkout</p>
+        <h1 id="checkoutTitle">Checkout</h1>
+        <div id="checkoutBody"></div>
+      </section>
+
+      <section id="view-orders" hidden>
+        <p class="crumb"><a href="#home">Home</a> / Orders</p>
+        <h1>Your orders</h1>
+        <div id="ordersBody"></div>
+      </section>
+
+      <section id="view-page" hidden>
+        <p class="crumb"><a href="#home">Home</a> / <span id="pageCrumb"></span></p>
+        <h1 id="pageTitle"></h1>
+        <div id="pageBody"></div>
+      </section>
+    </div>
+  </main>
+
+  <div class="pay-strip">
+    <div class="wrap pay-row" aria-label="Also on">
+      <img class="store-logo" src="images/logos/amazon.svg" alt="Amazon" />
+      <img class="store-logo" src="images/logos/flipkart.png" alt="Flipkart" />
+      <img class="store-logo" src="images/logos/blinkit.svg" alt="Blinkit" />
+      <img class="store-logo" src="images/logos/instamart.png" alt="Instamart" />
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap foot-grid">
+      <div>
+        <p class="foot-brand">Temps</p>
+        <p class="foot-sub">Kamrup Spice</p>
+        <p>Assamese traditional foods</p>
+        <p>Kamrup, Assam</p>
+        <p><a href="#contact">Contact us</a></p>
+      </div>
+      <div>
+        <h2>Shop</h2>
+        <ul>
+          <li><a href="#shop/Pitha">Pitha</a></li>
+          <li><a href="#shop/Laddoo">Laddoo</a></li>
+          <li><a href="#shop/Jalpan">Jalpan</a></li>
+          <li><a href="#shop/Rice">Rice products</a></li>
+          <li><a href="#shop/Grocery">Grocery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Help</h2>
+        <ul>
+          <li><a href="#orders">Your orders</a></li>
+          <li><a href="#page/shipping">Shipping</a></li>
+          <li><a href="#page/return">Returns</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Useful links</h2>
+        <ul>
+          <li><a href="#page/privacy">Privacy Policy</a></li>
+          <li><a href="#page/buying">Buying Policy</a></li>
+          <li><a href="#page/return">Return Policy</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copybar">Temps · Kamrup Spice · 2026</div>
+  </footer>
+
+  <div class="mnav" id="mnav">
+    <div class="mnav-back" data-mnav-close></div>
+    <nav class="mnav-panel" aria-label="Menu">
+      <form class="mnav-search" id="mnavSearch">
+        <input type="search" placeholder="Search for products" aria-label="Search products" />
+        <button type="submit" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+      </form>
+      <div class="mnav-tabs">
+        <button type="button" class="on" data-mtab="menu">Menu</button>
+        <button type="button" data-mtab="cats">Categories</button>
+      </div>
+      <div class="mnav-list" id="mnavMenu">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#about" data-nav="about">About</a>
+        <button class="mnav-sub" type="button" data-nav="shop" aria-expanded="false" aria-controls="mnavKidsWrap">
+          Shop
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <div class="mnav-kids" id="mnavKidsWrap">
+          <div id="mnavKids"></div>
+        </div>
+        <a href="#orders" data-nav="orders">Orders</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </div>
+      <div class="mnav-list" id="mnavCats" hidden></div>
+    </nav>
+  </div>
+
+  <div class="chat-fab">
+    <a class="chat-btn" href="#contact" aria-label="Chat with us">
+      <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="#fff" d="M12.04 2C6.58 2 2.15 6.4 2.15 11.83c0 1.74.46 3.44 1.34 4.94L2 22l5.39-1.41a10.1 10.1 0 0 0 4.65 1.12h.01c5.46 0 9.89-4.4 9.89-9.83C21.94 6.4 17.5 2 12.04 2zm5.76 13.92c-.24.68-1.4 1.25-1.93 1.33-.49.07-1.1.1-1.78-.11-.41-.13-.94-.3-1.62-.59-2.85-1.23-4.7-4.1-4.84-4.29-.14-.19-1.15-1.53-1.15-2.92 0-1.39.73-2.07 1-2.36.24-.26.64-.38.85-.38.21 0 .42 0 .6.01.19.01.45-.07.7.53.26.64.87 2.2.95 2.36.08.16.13.35.03.56-.1.21-.16.34-.31.52-.16.18-.33.4-.47.54-.16.16-.32.33-.14.64.19.31.83 1.37 1.78 2.22 1.22 1.09 2.25 1.43 2.57 1.59.32.16.5.13.69-.08.19-.21.8-.93 1.01-1.25.21-.32.42-.26.7-.16.28.1 1.79.84 2.1.99.31.16.51.23.59.36.07.13.07.75-.17 1.43z"/>
+      </svg>
+    </a>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Mobile">
+    <a href="#shop">Products</a>
+    <a href="#shop" id="mobileFilters">Filters</a>
+    <a href="#wishlist">Wishlist</a>
+    <a href="#cart" data-drawer>Cart</a>
+    <a href="#orders">Orders</a>
+  </nav>
+
+  <div id="cartDrawer" hidden>
+    <div class="drawer-back" data-drawer-close></div>
+    <aside class="drawer" role="dialog" aria-labelledby="drawerTitle">
+      <div class="drawer-head">
+        <span id="drawerTitle">Shopping cart</span>
+        <button class="drawer-close" type="button" data-drawer-close>× Close</button>
+      </div>
+      <div class="drawer-body" id="drawerBody"></div>
+    </aside>
+  </div>
+
+  <script>
+    (function () {
+      var PRODUCTS = [
+        { id: "narikol-laddoo", photo: "images/narikol-laddoo.jpg", name: "Narikol Laddoo", as: "নাৰিকল লাড়ু", cat: "Laddoo", price: 90, weight: "200 g", pieces: "10 pcs", pack: "#c62828", blurb: "Coconut cooked with sugar. 10 pieces in a 200 g pack. Eaten with tea." },
+        { id: "til-laddoo", photo: "images/til-laddoo.jpg", name: "Til Laddoo", as: "তিল লাড়ু", cat: "Laddoo", price: 70, weight: "200 g", pieces: "10 pcs", pack: "#6d4c41", blurb: "Sesame and jaggery balls. Made for Bihu and for tea." },
+        { id: "pokamithoi", photo: "images/pokamithoi.jpg", name: "Pokamithoi Laddoo", as: "পকামিঠৈ লাড়ু", cat: "Laddoo", price: 60, weight: "200 g", pieces: "10 pcs", pack: "#ef6c00", blurb: "Roasted rice flour mixed with melted jaggery and rolled into balls." },
+        { id: "til-pitha", photo: "images/til-pitha.jpg", name: "Til Pitha", as: "তিল পিঠা", cat: "Pitha", price: 85, weight: "200 g", pack: "#1565c0", blurb: "Rice rolls filled with roasted sesame and jaggery." },
+        { id: "narikol-pitha", photo: "images/narikol-pitha.jpg", name: "Narikol Pitha", as: "নাৰিকল পিঠা", cat: "Pitha", price: 100, weight: "200 g", pieces: "10 pcs", pack: "#c62828", blurb: "Rice pitha with a coconut filling. 10 pieces." },
+        { id: "ghila-pitha", photo: "images/ghila-pitha.jpg", name: "Ghila Pitha", as: "ঘিলা পিঠা", cat: "Pitha", price: 80, weight: "200 g", pack: "#b71c1c", blurb: "Fried rice pitha. Crisp on the outside." },
+        { id: "pithaguri", photo: "images/pithaguri.jpg", name: "Pithaguri", as: "পিঠাগুড়ি", cat: "Rice", price: 50, weight: "500 g", pack: "#2e7d32", blurb: "Fine rice flour for til pitha, narikol pitha and other pitha at home." },
+        { id: "malbhog-chira", photo: "images/chira.jpg", name: "Malbhog Chira", as: "মালভোগ চিৰা", cat: "Jalpan", price: 58, weight: "200 g", pack: "#f9a825", blurb: "Flattened rice from malbhog paddy. Soak and eat for breakfast." },
+        { id: "muri", photo: "images/muri.jpg", name: "Muri", as: "মুৰি", cat: "Jalpan", price: 25, weight: "170 g", pack: "#ef6c00", blurb: "Puffed rice. A light snack with tea, or with milk and gur." },
+        { id: "akhoi", photo: "images/akhoi.jpg", name: "Akhoi", as: "আখৈ", cat: "Jalpan", price: 25, weight: "150 g", pack: "#f57f17", blurb: "Puffed rice with very little oil. Breakfast or evening tea." },
+        { id: "akhoiguri", photo: "images/akhoiguri.jpg", name: "Akhoiguri", as: "আখৈগুড়ি", cat: "Rice", price: 60, weight: "200 g", pack: "#6a1b9a", blurb: "Ground akhoi. Mix with hot milk and sugar." },
+        { id: "sandah", photo: "images/sandah.jpg", name: "Sandah", as: "সান্দহ", cat: "Rice", price: 60, weight: "400 g", pack: "#2e7d32", blurb: "Roasted rice powder. Stir into milk or water." },
+        { id: "chattoo", photo: "images/chattoo.jpg", name: "Chattoo", as: "চাতু", cat: "Jalpan", price: 45, weight: "200 g", pack: "#827717", blurb: "Roasted gram flour. Mix with water, salt or jaggery." },
+        { id: "koomal", photo: "images/koomal.jpg", name: "Koomal Chaul", as: "কোমল চাউল", cat: "Rice", price: 75, weight: "500 g", pack: "#1565c0",
+          options: [{ label: "500 g", price: 75 }, { label: "1 kg", price: 150 }],
+          blurb: "Soft rice. Soak in water for a few minutes, drain, and eat with curd, cream or gur. No cooking." },
+        { id: "roasted-channa", photo: "images/roasted-channa.jpg", name: "Roasted Channa", as: "ভজা বুট", cat: "Jalpan", price: 10, weight: "100 g", pack: "#8d6e63", blurb: "Dry roasted chickpeas. A small salty snack with tea." },
+        { id: "milky-jalpan", photo: "images/milky-jalpan.jpg", name: "Milky Jalpan", as: "মিল্কি জলপান", cat: "Jalpan", price: 50, weight: "200 g", pack: "#efebe9", blurb: "Sweet rice mix. Stir into warm milk or water for breakfast." },
+        { id: "milky-sandah", photo: "images/milky-sandah.jpg", name: "Milky Sandah", as: "মিল্কি সান্দহ", cat: "Rice", price: 60, weight: "300 g", pack: "#d7ccc8", blurb: "Roasted rice powder with milk. Add warm water and it is ready." },
+        { id: "joha", photo: "images/joha-chaul.jpg", name: "Joha Chaul", as: "জহা চাউল", cat: "Rice", price: 90, weight: "500 g", pack: "#fff8e1",
+          options: [{ label: "500 g", price: 90 }, { label: "1 kg", price: 170 }],
+          blurb: "Short aromatic rice from Assam. Cook like plain rice." },
+        { id: "lahi-cheera", photo: "images/lahi-cheera.jpg", name: "Lahi Cheera", as: "লাহি চিৰা", cat: "Jalpan", price: 48, weight: "200 g", pack: "#f5f5f5", blurb: "Very thin flattened rice. Soak and eat with milk or curd." },
+        { id: "poha", photo: "images/poha.jpg", name: "Poha", as: "পোহা", cat: "Jalpan", price: 60, weight: "500 g", pack: "#fff3e0", blurb: "Flattened rice flakes. Rinse and eat, or soften for a quick breakfast." },
+        { id: "jhal-muri", photo: "images/jhal-muri.jpg", name: "Jhal Muri", as: "ঝাল মুৰি", cat: "Jalpan", price: 30, weight: "150 g", pack: "#e65100", blurb: "Puffed rice mixed with peanuts and spices. Eat as it is." },
+        { id: "mini-jalpan", photo: "images/mini-jalpan.jpg", name: "Mini Jalpan", as: "মিনি জলপান", cat: "Jalpan", price: 40, weight: "200 g", pack: "#efebe9", blurb: "A small sweet rice mix. Stir into warm milk." },
+        { id: "dalia", photo: "images/dalia.jpg", name: "Dalia", as: "দালিয়া", cat: "Grocery", price: 55, weight: "500 g", pack: "#c4a35a", blurb: "Broken wheat. Boil in water or milk for breakfast." },
+        { id: "suji", photo: "images/suji.jpg", name: "Suji", as: "ছুজি", cat: "Grocery", price: 40, weight: "500 g", pack: "#fff8e1", blurb: "Fine semolina. Use for halwa, upma, or a quick porridge." },
+        { id: "besan", photo: "images/besan.jpg", name: "Besan", as: "বেচন", cat: "Grocery", price: 37, weight: "200 g", pack: "#fbc02d",
+          options: [{ label: "200 g", price: 37 }, { label: "500 g", price: 84 }],
+          blurb: "Chickpea flour. Use for pakora, or mix with water as a snack." },
+        { id: "sagu", photo: "images/sagu.jpg", name: "Sagu", as: "সাগু", cat: "Grocery", price: 45, weight: "200 g", pack: "#fafafa", blurb: "Sago pearls. Soak until soft, then eat with milk and sugar." },
+        { id: "masurguri", photo: "images/masurguri.jpg", name: "Masurguri", as: "মচুৰগুড়ি", cat: "Grocery", price: 50, weight: "200 g", pack: "#a1887f", blurb: "Ground red lentil. Stir into hot water for a quick bowl." },
+        { id: "atta", photo: "images/atta.jpg", name: "Atta", as: "আটা", cat: "Grocery", price: 48, weight: "1 kg", pack: "#bcaaa4", blurb: "Whole wheat flour for roti." },
+        { id: "maida", photo: "images/maida.jpg", name: "Maida", as: "ময়দা", cat: "Grocery", price: 35, weight: "500 g", pack: "#ffffff", blurb: "Refined wheat flour for snacks and sweets." },
+        { id: "rajmah", photo: "images/rajmah.jpg", name: "Rajmah", as: "ৰাজমাহ", cat: "Grocery", price: 90, weight: "500 g", pack: "#b71c1c", blurb: "Red kidney beans. Soak and cook." },
+        { id: "lubia", photo: "images/lubia.jpg", name: "Lubia", as: "লুবিয়া", cat: "Grocery", price: 70, weight: "500 g", pack: "#efebe9", blurb: "Black-eyed peas. Soak and cook." },
+        { id: "gur", photo: "images/gur.jpg", name: "Gur", as: "গুৰ", cat: "Grocery", price: 50, weight: "450 g", pack: "#e65100", blurb: "Jaggery. Eat a piece, or melt it for pitha and tea." }
+      ];
+
+      var PAGES = {
+        privacy: { title: "Privacy Policy", html: "<p>We use your name, phone and address to take payment and ship the order. We do not pass this to other companies.</p>" },
+        buying: { title: "Buying Policy", html: "<p>Add packs to the cart and pay at checkout by UPI, card, or cash on delivery. We ship to the address you enter.</p>" },
+        shipping: { title: "Shipping", html: "<p>Delivery is ₹49. Orders of ₹499 and above ship free, across India.</p><p>Packs leave Kamrup in 1–2 days. You can see the order under Orders after checkout.</p>" },
+        return: { title: "Return Policy", html: "<p>If a pack arrives torn or spoiled, tell us within a day of delivery and we will send a replacement.</p><p>Opened food packs cannot be returned.</p>" }
+      };
+
+      var CATS = [
+        { id: "Pitha", as: "পিঠা" },
+        { id: "Laddoo", as: "লাড়ু" },
+        { id: "Jalpan", as: "জলপান" },
+        { id: "Rice", as: "চাউল" },
+        { id: "Grocery", as: "গেলামাল" }
+      ];
+
+      var pageSize = 9;
+      var gridCols = 3;
+      var shopPage = 1;
+      var shopCat = "all";
+      var cart = load("temps-cart", []);
+      var wishes = load("temps-wish", []);
+      var orders = load("temps-orders", []);
+      var FREE_OVER = 499;
+      var DELIVERY_FEE = 49;
+
+      function load(key, fallback) {
+        try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+        catch (e) { return fallback; }
+      }
+      function saveCart() { localStorage.setItem("temps-cart", JSON.stringify(cart)); updateCounts(); }
+      function saveWish() { localStorage.setItem("temps-wish", JSON.stringify(wishes)); updateCounts(); }
+      function money(n) { return "₹" + n.toFixed(2); }
+      function find(id) {
+        for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === id) return PRODUCTS[i];
+      }
+      function thumb(p) {
+        return '<div class="pack-stage"><div class="pouch">' +
+          '<span class="pack-brand">Temps</span>' +
+          '<span class="pack-place">Taste of Assam</span>' +
+          '<span class="pack-photo"><img src="' + p.photo + '" alt=""></span>' +
+          '<span class="pack-name">' + esc(p.name) + '</span>' +
+          '<span class="pack-weight">' + esc(p.weight) + '</span>' +
+          '</div></div>';
+      }
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      }
+      function priceLabel(p) {
+        if (!p.options) return money(p.price);
+        return money(p.options[0].price) + " – " + money(p.options[1].price);
+      }
+      function card(p) {
+        var action = p.options
+          ? '<a class="btn small" href="#product/' + p.id + '">Select options</a>'
+          : '<button class="btn small" type="button" data-add="' + p.id + '">Add to cart</button>';
+        var peekAction = p.options
+          ? '<a class="btn" href="#product/' + p.id + '">Select options</a>'
+          : '<button class="btn" type="button" data-add="' + p.id + '">Add to cart</button>';
+        var wished = wishes.indexOf(p.id) !== -1;
+        var peek = '<div class="peek">' +
+          '<img src="' + p.photo + '" alt="">' +
+          '<strong>' + esc(p.name) + '</strong>' +
+          '<span class="peek-cat">' + esc(p.cat) + '</span>' +
+          '<div class="price">' + priceLabel(p) + '</div>' +
+          '<p>' + esc(p.blurb) + '</p>' +
+          '<div class="peek-row">' +
+          '<button class="peek-icon' + (wished ? " on" : "") + '" type="button" data-wish="' + p.id + '" aria-label="Wishlist"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 21s-6.7-4.4-9.2-8.4C1 9.6 2 6.2 5.1 5 7.2 4.2 9.2 5 12 8.1 14.8 5 16.8 4.2 18.9 5c3.1 1.2 4.1 4.6 2.3 7.6C18.7 16.6 12 21 12 21z"/></svg></button>' +
+          peekAction +
+          '<a class="peek-icon" href="#product/' + p.id + '" aria-label="View ' + esc(p.name) + '"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M20 20l-3.2-3.2"/></svg></a>' +
+          '</div></div>';
+        return '<article class="card"><a class="pack-link" href="#product/' + p.id + '">' + thumb(p) + '</a>' +
+          '<div class="as-name" lang="as">' + esc(p.as) + '</div>' +
+          '<div class="price">' + priceLabel(p) + '</div>' + action + peek + '</article>';
+      }
+
+      function updateCounts() {
+        var n = 0;
+        cart.forEach(function (item) { n += item.qty; });
+        document.getElementById("navCart").textContent = n;
+        document.getElementById("navWish").textContent = wishes.length;
+      }
+
+      function addToCart(id, qty, optionLabel) {
+        var p = find(id);
+        if (!p) return;
+        var price = p.price;
+        var label = optionLabel || "";
+        if (p.options) {
+          var opt = p.options[0];
+          p.options.forEach(function (o) { if (o.label === optionLabel) opt = o; });
+          price = opt.price;
+          label = opt.label;
+        }
+        var key = id + "|" + label;
+        var existing = null;
+        cart.forEach(function (item) { if (item.key === key) existing = item; });
+        if (existing) existing.qty += qty;
+        else cart.push({ key: key, id: id, label: label, price: price, qty: qty });
+        saveCart();
+        openDrawer();
+      }
+
+      function pricesOf(p) {
+        if (!p.options) return [p.price];
+        return p.options.map(function (o) { return o.price; });
+      }
+      function priceBounds() {
+        var min = parseInt(document.getElementById("priceMin").value, 10);
+        var max = parseInt(document.getElementById("priceMax").value, 10);
+        if (min > max) { var swap = min; min = max; max = swap; }
+        return { min: min, max: max };
+      }
+      function paintPrice() {
+        var b = priceBounds();
+        document.getElementById("priceReadout").textContent = "₹" + b.min + " – ₹" + b.max;
+      }
+
+      function filtered() {
+        var q = document.getElementById("search").value.trim().toLowerCase();
+        var bounds = priceBounds();
+        var list = PRODUCTS.filter(function (p) {
+          if (shopCat !== "all" && p.cat !== shopCat) return false;
+          if (q && (p.name + " " + p.as + " " + p.cat).toLowerCase().indexOf(q) === -1) return false;
+          var prices = pricesOf(p);
+          var hit = false;
+          for (var i = 0; i < prices.length; i++) {
+            if (prices[i] >= bounds.min && prices[i] <= bounds.max) hit = true;
+          }
+          return hit;
+        });
+        var sort = document.getElementById("sort").value;
+        list.sort(function (a, b) {
+          if (sort === "low") return a.price - b.price;
+          if (sort === "high") return b.price - a.price;
+          if (sort === "name") return a.name.localeCompare(b.name);
+          return 0;
+        });
+        return list;
+      }
+
+      function renderShop() {
+        var list = filtered();
+        var pages = Math.max(1, Math.ceil(list.length / pageSize));
+        if (shopPage > pages) shopPage = pages;
+        var start = (shopPage - 1) * pageSize;
+        var slice = list.slice(start, start + pageSize);
+        var grid = document.getElementById("shopGrid");
+        grid.classList.remove("cols-2", "cols-4");
+        if (gridCols !== 3) grid.classList.add("cols-" + gridCols);
+        grid.innerHTML = slice.map(card).join("") || "<p>No products in this filter.</p>";
+        var from = list.length ? start + 1 : 0;
+        var to = Math.min(start + pageSize, list.length);
+        document.getElementById("resultCount").textContent = "Showing " + from + "–" + to + " of " + list.length;
+        var html = "";
+        for (var i = 1; i <= pages; i++) {
+          html += '<button type="button" data-page="' + i + '"' + (i === shopPage ? ' class="on"' : "") + ">" + i + "</button>";
+        }
+        document.getElementById("pages").innerHTML = pages > 1 ? html : "";
+      }
+
+      function renderCats() {
+        var browse = '<a href="#shop"><span>All products</span><small>' + PRODUCTS.length + "</small></a>";
+        var side = '<label><input type="radio" name="cat" value="all"' + (shopCat === "all" ? " checked" : "") + "> All products (" + PRODUCTS.length + ")</label>";
+        CATS.forEach(function (c) {
+          var n = PRODUCTS.filter(function (p) { return p.cat === c.id; }).length;
+          browse += '<a href="#shop/' + c.id + '"><span>' + c.id + '</span><small lang="as">' + c.as + " · " + n + "</small></a>";
+          side += '<label><input type="radio" name="cat" value="' + c.id + '"' + (shopCat === c.id ? " checked" : "") + "> " + c.id + " (" + n + ")</label>";
+        });
+        document.getElementById("browseMenu").innerHTML = browse;
+        document.getElementById("catFilters").innerHTML = side;
+        var catLinks = CATS.map(function (c) {
+          return '<a href="#shop/' + c.id + '">' + esc(c.id) + "</a>";
+        }).join("");
+        document.getElementById("mnavKids").innerHTML = '<a href="#shop">All products</a>' + catLinks;
+        document.getElementById("mnavCats").innerHTML = catLinks;
+      }
+
+      function renderProduct(id) {
+        var p = find(id);
+        if (!p) { location.hash = "#shop"; return; }
+        document.getElementById("productCrumb").innerHTML = '<a href="#home">Home</a> / <a href="#shop">Products</a> / ' + esc(p.name);
+        var facts = "<tr><td>Weight</td><td>" + esc(p.weight) + "</td></tr>";
+        if (p.pieces) facts += "<tr><td>Piece</td><td>" + esc(p.pieces) + "</td></tr>";
+        var options = "";
+        if (p.options) {
+          options = '<label for="opt">Pack</label><select id="opt">';
+          p.options.forEach(function (o) {
+            options += '<option value="' + esc(o.label) + '" data-price="' + o.price + '">' + esc(o.label) + " — " + money(o.price) + "</option>";
+          });
+          options += "</select>";
+        }
+        var wished = wishes.indexOf(p.id) !== -1;
+        document.getElementById("productView").innerHTML =
+          thumb(p) +
+          '<div class="product-buy"><p class="as-name" lang="as">' + esc(p.as) + "</p><h1>" + esc(p.name) + "</h1>" +
+          '<div class="price" id="livePrice">' + priceLabel(p) + "</div><p>" + esc(p.blurb) + "</p>" +
+          '<table class="facts">' + facts + "</table>" + options +
+          '<div class="qty"><button type="button" id="qtyMinus">−</button><input id="qty" value="1" inputmode="numeric" aria-label="Quantity"><button type="button" id="qtyPlus">+</button></div>' +
+          '<p><button class="btn" type="button" id="addBtn">Add to cart</button> <button class="btn light" type="button" id="wishBtn">' + (wished ? "Remove from wishlist" : "Add to wishlist") + "</button></p>" +
+          '<p class="note" id="addedNote"></p></div>';
+
+        var qty = document.getElementById("qty");
+        document.getElementById("qtyMinus").onclick = function () { qty.value = Math.max(1, parseInt(qty.value || "1", 10) - 1); };
+        document.getElementById("qtyPlus").onclick = function () { qty.value = Math.max(1, parseInt(qty.value || "1", 10) + 1); };
+        var opt = document.getElementById("opt");
+        if (opt) opt.onchange = function () {
+          document.getElementById("livePrice").textContent = money(parseFloat(opt.selectedOptions[0].getAttribute("data-price")));
+        };
+        document.getElementById("addBtn").onclick = function () {
+          var n = Math.max(1, parseInt(qty.value || "1", 10));
+          addToCart(p.id, n, opt ? opt.value : "");
+          document.getElementById("addedNote").textContent = "Added to cart.";
+        };
+        document.getElementById("wishBtn").onclick = function () {
+          var i = wishes.indexOf(p.id);
+          if (i === -1) wishes.push(p.id); else wishes.splice(i, 1);
+          saveWish();
+          this.textContent = wishes.indexOf(p.id) === -1 ? "Add to wishlist" : "Remove from wishlist";
+        };
+        var related = PRODUCTS.filter(function (o) { return o.cat === p.cat && o.id !== p.id; }).slice(0, 3);
+        document.getElementById("related").innerHTML = related.map(card).join("");
+      }
+
+      function subtotal() {
+        var n = 0;
+        cart.forEach(function (item) { n += item.price * item.qty; });
+        return n;
+      }
+      function deliveryFee(amount) {
+        if (!amount || amount >= FREE_OVER) return 0;
+        return DELIVERY_FEE;
+      }
+      function lineName(item) {
+        var p = find(item.id);
+        return p.name + (item.label ? " (" + item.label + ")" : "");
+      }
+      function cartRows(editable) {
+        return cart.map(function (item) {
+          var line = item.price * item.qty;
+          var qtyCell = editable
+            ? '<input data-qty="' + item.key + '" value="' + item.qty + '" inputmode="numeric" style="width:56px" aria-label="Quantity">'
+            : String(item.qty);
+          var removeCell = editable
+            ? '<td><button class="btn light small" type="button" data-remove="' + item.key + '">Remove</button></td>'
+            : "";
+          return "<tr><td>" + (editable ? '<a href="#product/' + item.id + '">' + esc(lineName(item)) + "</a>" : esc(lineName(item))) + "</td>" +
+            "<td>" + money(item.price) + "</td><td>" + qtyCell + "</td><td>" + money(line) + "</td>" + removeCell + "</tr>";
+        }).join("");
+      }
+      function totalsHtml(amount) {
+        var fee = deliveryFee(amount);
+        return '<div class="totals"><div>Subtotal ' + money(amount) + "</div>" +
+          "<div>Delivery " + (fee ? money(fee) : "Free") + "</div>" +
+          "<strong>Total " + money(amount + fee) + "</strong></div>";
+      }
+      function bindCartEdits() {
+        document.querySelectorAll("[data-qty]").forEach(function (input) {
+          input.onchange = function () {
+            var q = Math.max(1, parseInt(input.value || "1", 10));
+            cart.forEach(function (item) { if (item.key === input.getAttribute("data-qty")) item.qty = q; });
+            saveCart();
+            renderCart();
+          };
+        });
+        document.querySelectorAll("[data-remove]").forEach(function (btn) {
+          btn.onclick = function () {
+            cart = cart.filter(function (item) { return item.key !== btn.getAttribute("data-remove"); });
+            saveCart();
+            renderCart();
+          };
+        });
+      }
+
+      function renderDrawer() {
+        var box = document.getElementById("drawerBody");
+        if (!cart.length) {
+          box.innerHTML = '<div class="drawer-empty">' +
+            '<svg width="78" height="78" viewBox="0 0 24 24" fill="none" stroke="#c8c8c8" stroke-width="1.2" aria-hidden="true"><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/><path d="M3 4h2.2l2.2 11h11.2l1.7-8H7"/></svg>' +
+            "<p>No products in the cart.</p>" +
+            '<a class="btn drawer-return" href="#shop">Return to shop</a></div>';
+          return;
+        }
+        box.innerHTML = cart.map(function (item) {
+          var p = find(item.id);
+          return '<div class="drawer-line"><img src="' + p.photo + '" alt="">' +
+            "<div><strong>" + esc(lineName(item)) + "</strong><span>" + item.qty + " × " + money(item.price) + "</span></div>" +
+            '<button type="button" data-drawer-remove="' + item.key + '" aria-label="Remove ' + esc(lineName(item)) + '">×</button></div>';
+        }).join("") +
+          '<p class="drawer-sub"><span>Subtotal</span><strong>' + money(subtotal()) + "</strong></p>" +
+          '<p><a class="btn" href="#checkout">Checkout</a></p>' +
+          '<p><a href="#cart">View cart</a></p>';
+      }
+      function openDrawer() {
+        renderDrawer();
+        document.getElementById("cartDrawer").hidden = false;
+        document.body.classList.add("drawer-open");
+      }
+      function closeDrawer() {
+        document.getElementById("cartDrawer").hidden = true;
+        document.body.classList.remove("drawer-open");
+      }
+
+      function renderCart() {
+        var body = document.getElementById("cartBody");
+        if (!cart.length) {
+          body.innerHTML = '<p>Your cart is empty.</p><p><a class="btn" href="#shop">Continue shopping</a></p>';
+          return;
+        }
+        var amount = subtotal();
+        body.innerHTML =
+          '<div class="cart-scroll"><table class="cart-table"><thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr></thead><tbody>' +
+          cartRows(true) + "</tbody></table></div>" + totalsHtml(amount) +
+          '<p style="text-align:right;margin-top:16px"><a class="btn" href="#checkout">Checkout</a></p>' +
+          '<p class="crumb" style="text-align:right">Delivery is ₹49. Free above ₹499.</p>';
+        bindCartEdits();
+      }
+
+      function renderCheckout() {
+        var body = document.getElementById("checkoutBody");
+        if (!cart.length) {
+          body.innerHTML = '<p>Your cart is empty.</p><p><a class="btn" href="#shop">Continue shopping</a></p>';
+          return;
+        }
+        var amount = subtotal();
+        body.innerHTML =
+          '<div class="cart-scroll"><table class="cart-table"><thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th></tr></thead><tbody>' +
+          cartRows(false) + "</tbody></table></div>" + totalsHtml(amount) +
+          '<h2 style="margin-top:22px">Deliver to</h2>' +
+          '<form class="form" id="orderForm">' +
+          '<label for="oName">Name</label><input id="oName" required>' +
+          '<label for="oPhone">Phone</label><input id="oPhone" required inputmode="tel">' +
+          '<label for="oAddr">Address</label><textarea id="oAddr" required></textarea>' +
+          '<label for="oCity">City</label><input id="oCity" required>' +
+          '<label for="oPin">PIN code</label><input id="oPin" required inputmode="numeric" pattern="[0-9]{6}" title="6 digit PIN">' +
+          '<h2>Payment</h2>' +
+          '<label class="pay"><input type="radio" name="pay" value="UPI" checked> UPI</label>' +
+          '<label class="pay"><input type="radio" name="pay" value="Card"> Card or netbanking</label>' +
+          '<label class="pay"><input type="radio" name="pay" value="Cash on delivery"> Cash on delivery</label>' +
+          '<p><button class="btn" type="submit">Pay ' + money(amount + deliveryFee(amount)) + "</button></p>" +
+          '<p class="crumb">Preview checkout. Nothing is charged.</p></form>';
+
+        document.getElementById("orderForm").onsubmit = function (e) {
+          e.preventDefault();
+          var pay = "UPI";
+          document.querySelectorAll('input[name="pay"]').forEach(function (el) { if (el.checked) pay = el.value; });
+          var no = "T-" + (1000 + Math.floor(Math.random() * 9000));
+          var fee = deliveryFee(amount);
+          var order = {
+            no: no,
+            name: document.getElementById("oName").value,
+            phone: document.getElementById("oPhone").value,
+            address: document.getElementById("oAddr").value,
+            city: document.getElementById("oCity").value,
+            pin: document.getElementById("oPin").value,
+            pay: pay,
+            total: amount + fee,
+            items: cart.map(function (item) { return lineName(item) + " × " + item.qty; })
+          };
+          orders.unshift(order);
+          localStorage.setItem("temps-orders", JSON.stringify(orders));
+          cart = [];
+          saveCart();
+          var payLine = pay === "Cash on delivery"
+            ? "Pay " + money(order.total) + " when the order arrives."
+            : "Paid by " + pay + ".";
+          document.getElementById("checkoutTitle").textContent = "Order " + no;
+          body.innerHTML = "<p>" + payLine + " We will ship it to " +
+            esc(order.address) + ", " + esc(order.city) + " " + esc(order.pin) + ".</p>" +
+            '<p><a class="btn" href="#orders">View orders</a></p>';
+        };
+      }
+
+      function renderOrders() {
+        var body = document.getElementById("ordersBody");
+        if (!orders.length) {
+          body.innerHTML = '<p>No orders yet.</p><p><a class="btn" href="#shop">Shop</a></p>';
+          return;
+        }
+        body.innerHTML = orders.map(function (order) {
+          return '<article class="side" style="margin-bottom:12px"><h2>' + esc(order.no) + "</h2>" +
+            "<p>Shipping to " + esc(order.name) + ", " + esc(order.address) + ", " + esc(order.city) + " " + esc(order.pin) + "</p>" +
+            "<p>" + esc(order.items.join(", ")) + "</p>" +
+            "<p><strong>" + money(order.total) + "</strong> · " + esc(order.pay) + "</p></article>";
+        }).join("");
+      }
+
+      function renderWish() {
+        var list = wishes.map(find).filter(Boolean);
+        document.getElementById("wishGrid").innerHTML = list.length ? list.map(card).join("") : "<p>No items saved.</p>";
+      }
+
+      function show(name) {
+        ["home", "shop", "product", "cart", "checkout", "orders", "wishlist", "about", "contact", "page"].forEach(function (id) {
+          document.getElementById("view-" + id).hidden = id !== name;
+        });
+        document.getElementById("homeBanner").hidden = name !== "home";
+        document.querySelectorAll("[data-nav]").forEach(function (a) {
+          a.classList.toggle("active", a.getAttribute("data-nav") === name);
+        });
+        closeMenu();
+        window.scrollTo(0, 0);
+      }
+
+      function route() {
+        var hash = (location.hash || "#home").slice(1);
+        var parts = hash.split("/");
+        var name = parts[0] || "home";
+        if (name === "shop") {
+          shopCat = parts[1] || "all";
+          shopPage = 1;
+          var catPick = document.getElementById("searchCat");
+          catPick.value = shopCat === "all" ? "" : shopCat;
+          catPick.classList.toggle("picked", shopCat !== "all");
+          show("shop");
+          renderCats();
+          renderShop();
+        } else if (name === "product") {
+          show("product");
+          renderProduct(parts[1]);
+        } else if (name === "cart") {
+          show("cart");
+          renderCart();
+        } else if (name === "checkout") {
+          show("checkout");
+          renderCheckout();
+        } else if (name === "orders") {
+          show("orders");
+          renderOrders();
+        } else if (name === "wishlist") {
+          show("wishlist");
+          renderWish();
+        } else if (name === "page" && PAGES[parts[1]]) {
+          show("page");
+          document.getElementById("pageTitle").textContent = PAGES[parts[1]].title;
+          document.getElementById("pageCrumb").textContent = PAGES[parts[1]].title;
+          document.getElementById("pageBody").innerHTML = PAGES[parts[1]].html;
+        } else if (document.getElementById("view-" + name)) {
+          show(name);
+        } else {
+          show("home");
+        }
+      }
+
+      function renderTop() {
+        var picks = [
+          { id: "akhoi", stars: 5 },
+          { id: "muri", stars: 4 },
+          { id: "pithaguri", stars: 4 }
+        ];
+        document.getElementById("topRated").innerHTML = picks.map(function (pick) {
+          var p = find(pick.id);
+          var on = "★★★★★".slice(0, pick.stars);
+          var off = "★★★★★".slice(pick.stars);
+          return '<a href="#product/' + p.id + '"><img src="' + p.photo + '" alt="">' +
+            "<span><strong>" + esc(p.name) + "</strong>" +
+            '<span class="stars" aria-label="' + pick.stars + ' out of 5"><span>' + on + "</span>" + off + "</span>" +
+            '<span class="price">' + money(p.price) + "</span></span></a>";
+        }).join("");
+      }
+
+      document.getElementById("browseBtn").onclick = function () {
+        var menu = document.getElementById("browseMenu");
+        var open = menu.hidden;
+        menu.hidden = !open;
+        this.setAttribute("aria-expanded", open ? "true" : "false");
+      };
+      document.addEventListener("click", function (e) {
+        if (document.getElementById("homeBrowse").contains(e.target)) return;
+        document.getElementById("browseMenu").hidden = true;
+        document.getElementById("browseBtn").setAttribute("aria-expanded", "false");
+      });
+
+      document.getElementById("featuredGrid").innerHTML = ["narikol-laddoo", "pokamithoi", "til-laddoo"].map(function (id) {
+        return card(find(id));
+      }).join("");
+      document.getElementById("homeGrid").innerHTML = ["muri", "narikol-pitha", "roasted-channa", "milky-jalpan"].map(function (id) {
+        return card(find(id));
+      }).join("");
+      renderCats();
+      renderTop();
+      updateCounts();
+
+      document.body.addEventListener("click", function (e) {
+        var wishBtn = e.target.closest && e.target.closest("[data-wish]");
+        if (wishBtn) {
+          var id = wishBtn.getAttribute("data-wish");
+          var i = wishes.indexOf(id);
+          if (i === -1) wishes.push(id); else wishes.splice(i, 1);
+          saveWish();
+          document.querySelectorAll('[data-wish="' + id + '"]').forEach(function (btn) {
+            btn.classList.toggle("on", wishes.indexOf(id) !== -1);
+          });
+          return;
+        }
+        var add = e.target.getAttribute && e.target.getAttribute("data-add");
+        if (add) addToCart(add, 1, "");
+        var pg = e.target.getAttribute && e.target.getAttribute("data-page");
+        if (pg) { shopPage = parseInt(pg, 10); renderShop(); }
+        var opener = e.target.closest && e.target.closest("[data-drawer]");
+        if (opener) { e.preventDefault(); openDrawer(); }
+      });
+      document.getElementById("cartDrawer").addEventListener("click", function (e) {
+        if (e.target.closest("[data-drawer-close]") || e.target.closest("a")) closeDrawer();
+        var rm = e.target.closest("[data-drawer-remove]");
+        if (!rm) return;
+        cart = cart.filter(function (item) { return item.key !== rm.getAttribute("data-drawer-remove"); });
+        saveCart();
+        renderCart();
+        renderDrawer();
+      });
+      document.getElementById("catFilters").addEventListener("change", function (e) {
+        if (e.target.name !== "cat") return;
+        var next = e.target.value === "all" ? "#shop" : "#shop/" + e.target.value;
+        if ((location.hash || "#home") === next) {
+          shopCat = e.target.value;
+          shopPage = 1;
+          renderShop();
+        } else {
+          location.hash = next;
+        }
+      });
+      function clampPrice(which) {
+        var minEl = document.getElementById("priceMin");
+        var maxEl = document.getElementById("priceMax");
+        if (parseInt(minEl.value, 10) > parseInt(maxEl.value, 10)) {
+          if (which === "min") minEl.value = maxEl.value;
+          else maxEl.value = minEl.value;
+        }
+        paintPrice();
+      }
+      document.getElementById("priceMin").oninput = function () { clampPrice("min"); };
+      document.getElementById("priceMax").oninput = function () { clampPrice("max"); };
+      document.getElementById("priceFilter").onclick = function () {
+        shopPage = 1;
+        renderShop();
+      };
+      document.querySelector(".show-n").onclick = function (e) {
+        var size = e.target.getAttribute && e.target.getAttribute("data-size");
+        if (!size) return;
+        pageSize = parseInt(size, 10);
+        shopPage = 1;
+        document.querySelectorAll(".show-n button").forEach(function (btn) {
+          btn.classList.toggle("on", btn === e.target);
+        });
+        renderShop();
+      };
+      document.querySelector(".view-n").onclick = function (e) {
+        var btn = e.target.closest ? e.target.closest("button") : null;
+        if (!btn) return;
+        var cols = btn.getAttribute("data-cols");
+        if (!cols) return;
+        gridCols = parseInt(cols, 10);
+        document.querySelectorAll(".view-n button").forEach(function (b) {
+          b.classList.toggle("on", b === btn);
+        });
+        renderShop();
+      };
+      document.getElementById("sort").onchange = function () { shopPage = 1; renderShop(); };
+      function goSearch() {
+        var v = document.getElementById("searchCat").value;
+        var next = v ? "#shop/" + v : "#shop";
+        shopPage = 1;
+        if ((location.hash || "#home") === next) {
+          shopCat = v || "all";
+          renderShop();
+        } else {
+          location.hash = next;
+        }
+      }
+      document.getElementById("search").oninput = goSearch;
+      document.getElementById("searchCat").onchange = function () {
+        this.classList.toggle("picked", this.value !== "");
+        goSearch();
+      };
+      document.getElementById("searchForm").onsubmit = function (e) {
+        e.preventDefault();
+        goSearch();
+      };
+      function closeMenu() {
+        document.getElementById("mnav").classList.remove("open");
+        document.body.classList.remove("mnav-open");
+        document.getElementById("menuBtn").setAttribute("aria-expanded", "false");
+        document.querySelectorAll("[data-mtab]").forEach(function (b) {
+          b.classList.toggle("on", b.getAttribute("data-mtab") === "menu");
+        });
+        document.getElementById("mnavMenu").hidden = false;
+        document.getElementById("mnavCats").hidden = true;
+        document.getElementById("mnavKidsWrap").classList.remove("open");
+        var sub = document.querySelector(".mnav-sub");
+        sub.classList.remove("open");
+        sub.setAttribute("aria-expanded", "false");
+      }
+      function openMenu() {
+        document.getElementById("mnav").classList.add("open");
+        document.body.classList.add("mnav-open");
+        document.getElementById("menuBtn").setAttribute("aria-expanded", "true");
+      }
+      document.getElementById("menuBtn").onclick = function () {
+        if (document.getElementById("mnav").classList.contains("open")) closeMenu();
+        else openMenu();
+      };
+      document.getElementById("mnav").onclick = function (e) {
+        if (e.target.closest("[data-mnav-close]")) { closeMenu(); return; }
+        var tab = e.target.closest("[data-mtab]");
+        if (tab) {
+          var which = tab.getAttribute("data-mtab");
+          document.querySelectorAll("[data-mtab]").forEach(function (b) {
+            b.classList.toggle("on", b === tab);
+          });
+          document.getElementById("mnavMenu").hidden = which !== "menu";
+          document.getElementById("mnavCats").hidden = which !== "cats";
+          return;
+        }
+        var sub = e.target.closest(".mnav-sub");
+        if (sub) {
+          var kids = document.getElementById("mnavKidsWrap");
+          var open = kids.classList.toggle("open");
+          sub.classList.toggle("open", open);
+          sub.setAttribute("aria-expanded", open ? "true" : "false");
+          return;
+        }
+        if (e.target.closest("a")) closeMenu();
+      };
+      document.getElementById("mnavSearch").onsubmit = function (e) {
+        e.preventDefault();
+        document.getElementById("search").value = this.querySelector("input").value;
+        closeMenu();
+        goSearch();
+      };
+      document.getElementById("filterBtn").onclick = function () {
+        document.getElementById("side").classList.toggle("closed");
+      };
+      document.getElementById("mobileFilters").onclick = function () {
+        document.getElementById("side").classList.remove("closed");
+      };
+      document.getElementById("contactForm").onsubmit = function (e) {
+        e.preventDefault();
+        e.target.reset();
+        document.getElementById("contactNote").textContent = "Message received. We will reply on this number.";
+      };
+
+      window.addEventListener("hashchange", route);
+      route();
+    })();
+  </script>
+</body>
+</html>
