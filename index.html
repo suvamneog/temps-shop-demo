@@ -82,18 +82,18 @@
     .topbar a:hover { text-decoration: underline; }
 
     .header { border-bottom: 1px solid var(--line); background: #fff; }
-    .brand { text-align: center; padding: 8px 12px 4px; }
+    .brand { text-align: center; padding: 4px 12px 2px; line-height: 1.15; }
     .brand a { text-decoration: none; }
-    .brand-logo { display: block; width: 76px; height: auto; margin: 0 auto 6px; }
+    .brand-logo { display: block; width: 52px; height: auto; margin: 0 auto 2px; }
     .brand-en {
       display: block;
       color: var(--red);
-      font-size: 34px;
+      font-size: 26px;
       font-weight: 700;
       line-height: 1;
     }
-    .brand-sub { display: block; font-size: 13px; letter-spacing: .04em; }
-    .brand-as { display: block; color: var(--red); font-size: 22px; font-weight: 600; }
+    .brand-sub { display: block; font-size: 12px; letter-spacing: .04em; }
+    .brand-as { display: block; color: var(--red); font-size: 16px; font-weight: 600; }
 
     .nav-row {
       display: flex;
@@ -1092,8 +1092,9 @@
       .side-stack.closed { display: none; }
     }
     @media (max-width: 460px) {
-      .brand-en { font-size: 28px; }
-      .brand-as { font-size: 18px; }
+      .brand-logo { width: 44px; }
+      .brand-en { font-size: 22px; }
+      .brand-as { font-size: 14px; }
       .gamosa { height: 24px; background-size: auto 24px; }
     }
     @keyframes view-in {
